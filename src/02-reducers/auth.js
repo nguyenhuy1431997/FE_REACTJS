@@ -1,20 +1,22 @@
-import * as types from './../constants/authTypes';
+import * as types from '../07-constants/authTypes';
 
 const initialState = {
     users: [],
     user: {},
-    _token: null,
 };
 const user = (state = initialState, action) => {
     switch (action.type) {
-        case types.REGISTER_REQUEST:
-            return {
-                ...state,
-            };
+        case types.REGISTER_PROGRESS:
         case types.REGISTER_SUCCESS:
             return {
                 ...state,
-                _token: action.data
+                status: action.type,
+            };
+        case types.REGISTER_FAILED:
+            return {
+                ...state,
+                status: action.type,
+                error: action.data.error,
             };
         default:
             return {
